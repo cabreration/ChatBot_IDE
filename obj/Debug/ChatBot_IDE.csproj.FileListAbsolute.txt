@@ -1,0 +1,10 @@
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\bin\Debug\ChatBot_IDE.exe.config
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\bin\Debug\ChatBot_IDE.exe
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\bin\Debug\ChatBot_IDE.pdb
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\obj\Debug\ChatBot_IDE.csprojAssemblyReference.cache
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\obj\Debug\ChatBot_IDE.Form1.resources
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\obj\Debug\ChatBot_IDE.Properties.Resources.resources
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\obj\Debug\ChatBot_IDE.csproj.GenerateResource.cache
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\obj\Debug\ChatBot_IDE.csproj.CoreCompileInputs.cache
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\obj\Debug\ChatBot_IDE.exe
+C:\Users\jacab\Documents\Proyectos\ChatBot_Compiler\ChatBot_IDE\ChatBot_IDE\obj\Debug\ChatBot_IDE.pdb
