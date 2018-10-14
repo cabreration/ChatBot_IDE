@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net;
 
 namespace ChatBot_IDE
 {
@@ -17,6 +20,8 @@ namespace ChatBot_IDE
         {
             InitializeComponent();
         }
+
+        private static HttpClient client = new HttpClient();
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -53,9 +58,21 @@ namespace ChatBot_IDE
             this.archivos.Controls.RemoveAt(actual);
         }
 
-        private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void ejecutarToolStripMenuItem_ClickAsync(object sender, EventArgs e)
         {
+            int actual = this.archivos.SelectedIndex;
+            String texto = ((RichTextBox)((this.archivos.Controls[actual]).Controls[0])).Text;
 
+            string json = "\"" + texto + "\"";
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+
+            var byteContent = new ByteArrayContent(buffer);
+
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await client.PostAsync("https://localhost:44375/api/ComunicacionIDE", byteContent);
+
+            var responseString = await response.Content.ReadAsStringAsync();
         }
 
         private void verErroresToolStripMenuItem_Click(object sender, EventArgs e)
