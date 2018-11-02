@@ -84,15 +84,28 @@ namespace ChatBot_IDE
 
             string jsonR = Convert.ToString(responseString);
 
-            JObject obj = JObject.Parse(jsonR);
-            JToken uno = obj["Impresiones"];
-            JToken dos = obj["Errores"];
-            string one = uno.ToString();
-            string two = dos.ToString();
-            JArray cadenas = JArray.Parse(one);
-            JArray errs = JArray.Parse(two);
-            extraerImpresiones(cadenas);
-            extraerErrores(errs);
+            if (jsonR != null && !jsonR.Equals(""))
+            {
+                JObject obj = JObject.Parse(jsonR);
+                if (obj != null)
+                {
+                    JToken uno = obj["Impresiones"];
+                    JToken dos = obj["Errores"];
+                    if (uno != null)
+                    {
+                        string one = uno.ToString();
+                        JArray cadenas = JArray.Parse(one);
+                        extraerImpresiones(cadenas);
+                        
+                    }
+                    if (dos != null)
+                    {
+                        string two = dos.ToString();
+                        JArray errs = JArray.Parse(two);
+                        extraerErrores(errs);
+                    }
+                }
+            }
         }
 
         private void verErroresToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,9 +132,9 @@ namespace ChatBot_IDE
 
         private void extraerImpresiones(JArray impres) 
         {
-            foreach (JObject impresion in impres)
+            foreach (JValue impresion in impres)
             {
-                string actual = Convert.ToString(impresion.GetValue("valor"));
+                string actual = Convert.ToString(impresion);
                 consolaSalidas.Text += actual + "\n";
                 impresiones.Add(actual);
             }
