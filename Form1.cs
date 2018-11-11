@@ -34,6 +34,7 @@ namespace ChatBot_IDE
             OpenFileDialog browser = new OpenFileDialog();
             if (browser.ShowDialog() == DialogResult.OK)
             {
+                string direccion = browser.FileName;
                 Stream contenido = browser.OpenFile();
                 if (contenido != null)
                 {
@@ -42,7 +43,7 @@ namespace ChatBot_IDE
                     RichTextBox arch = new RichTextBox();
                     arch.Size = new Size(this.archivos.Width - 10, this.archivos.Height - 10);
                     arch.Text = salida;
-                    TabPage pagina = new TabPage();
+                    TabPage pagina = new TabPage(direccion);
                     pagina.Controls.Add(arch);
                     this.archivos.Controls.Add(pagina);
                 }
@@ -115,7 +116,23 @@ namespace ChatBot_IDE
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string direccion = this.archivos.SelectedTab.Text;
+            if (direccion == null || direccion.Equals(""))
+            {
+                int actual = this.archivos.SelectedIndex;
+                String texto = ((RichTextBox)((this.archivos.Controls[actual]).Controls[0])).Text;
+                SaveFileDialog guardar = new SaveFileDialog();
+                if (guardar.ShowDialog() == DialogResult.OK)
+                {
+                    String file = guardar.FileName;
+                    File.WriteAllText(file, texto);
+                }
+                return;
+            }
 
+            int current = this.archivos.SelectedIndex;
+            String text = ((RichTextBox)((this.archivos.Controls[current]).Controls[0])).Text;
+            File.WriteAllText(direccion, text);
         }
 
         private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
