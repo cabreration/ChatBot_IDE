@@ -180,5 +180,56 @@ namespace ChatBot_IDE
                 }
             }
         }
+
+        private void archivos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void ejecucionDirectaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            impresiones = new List<string>();
+            errores = new List<ErrorC>();
+            consolaSalidas.Text = "";
+
+            int actual = this.archivos.SelectedIndex;
+            String texto = ((RichTextBox)((this.archivos.Controls[actual]).Controls[0])).Text;
+
+            string json = texto;
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await client.PostAsync("https://localhost:44375/api/ControladorEjecucion", byteContent);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            string jsonR = Convert.ToString(responseString);
+
+            if (jsonR != null && !jsonR.Equals(""))
+            {
+                JObject obj = JObject.Parse(jsonR);
+                if (obj != null)
+                {
+                    JToken uno = obj["Impresiones"];
+                    JToken dos = obj["Errores"];
+                    if (uno != null)
+                    {
+                        string one = uno.ToString();
+                        JArray cadenas = JArray.Parse(one);
+                        extraerImpresiones(cadenas);
+
+                    }
+                    if (dos != null)
+                    {
+                        string two = dos.ToString();
+                        JArray errs = JArray.Parse(two);
+                        extraerErrores(errs);
+                    }
+                }
+            }
+
+            List<ErrorC> eros = this.errores;
+        }
     }
 }
